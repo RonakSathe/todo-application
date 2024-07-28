@@ -18,9 +18,12 @@ const register = async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt);
 
 
+  
+  
   // Create user in MongoDB
   const user = new User({ username, email, password: hashedPassword });
   await user.save();
+  
 
   // Register user in Supabase
   const { user:supabaseUser,error } = await supabase.auth.signUp({
@@ -50,7 +53,7 @@ const login = async (req, res) => {
   }
 
   const isValidPassword = await bcrypt.compare(password,user.password);
-
+  console.log("Hey recently  hashed the password");
   if (!isValidPassword) {
     return res.status(400).json({ message: 'Incorrect Password... Please try Again.' });
   }
