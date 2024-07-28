@@ -2,7 +2,8 @@ const Todo = require('../models/Todo');
 const {ObjectId} = require('mongoose').Types;
 
 const createTodo = async (req, res) => {
-  const { userId,title, description } = req.body;
+  const { title, description } = req.body;
+  const userId = req.user.userId;
   const todo = new Todo({
     title,
     description,
