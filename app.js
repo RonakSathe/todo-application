@@ -1,6 +1,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./todo-application/routes/authRoutes')
 const todoRoutes = require('./todo-application/routes/todoRoutes');
@@ -8,8 +9,13 @@ const sessionRoutes = require('./todo-application/routes/sessionRoutes');
 
 dotenv.config();
 
+const corsOptions={
+  origin: 'https://ronaksathe.netlify.app',
+  optionsSuccessStatus:200
+};
 const app = express();
 
+app.use(cors(corsOptions))
 app.use(express.json());
 
 // Connect to MongoDB

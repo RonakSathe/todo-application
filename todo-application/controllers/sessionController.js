@@ -27,13 +27,15 @@ const verifyToken = async (req, res, next) => {
 
   try {
 
+    console.log("Decoding the token");
     const decoded = jwt.verify(token, JWT_SECRET);
+    console.log("Decoded Successfully");
     console.log(decoded);
 
     req.user = decoded;
 
     if (!req.user.userId) {
-      return res.status(401).json({ message: 'Invalid token' });
+      return res.status(401).json({ message: 'Invalid Token:: UserId not found from the token.' });
     }
     
     next();
